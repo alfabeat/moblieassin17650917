@@ -1,8 +1,17 @@
 //import express library
 import express from 'express'
+//import mongoose library
+import mongoose from 'mongoose'
+
 //set up express and configure to use JSON when dealing with requests
 const app = express()
 app.use(express.json());
+
+mongoose.connect('mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0').then(() =>{
+console.log("Connected to MongoDB");
+}).catch(err => {
+    console.log("error mongo connect");
+});
 /*--- This is the new code ---*/
 // Import Body parser, which will help us read any data sent via POST
 import bodyParser from "body-parser"
@@ -30,3 +39,4 @@ const status = {
 };
 response.send(status);
 });
+//mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0

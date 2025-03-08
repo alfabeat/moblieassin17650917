@@ -10,13 +10,13 @@ message: 'Welcome to my REST API!'
 });
 });
 // Import controllers here
-import * as userController from "../Controllers/UnitsControllers.js"
+import * as loginController from "../Controllers/UnitsControllers.js"
 import verifyToken from '../auth/auth.js'
 // define routes here
 router.route('/login')
-    .post(userController.login);
+    .post(loginController.login);
 
-    router.route('/admin')
-    .get([verifyToken, userController.admin]);
+router.route('/admin')
+    .get([verifyToken, loginController.admin]);
 // Export API routes. As it is the only export, we make it the default.
 export default router;
