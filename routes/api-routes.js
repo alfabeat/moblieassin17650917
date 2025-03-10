@@ -21,5 +21,7 @@ router.route('/admin')
     .get([verifyToken, loginController.admin]);
 router.route('/save')
     .post(musicController.postMusic);
+router.route('/gettitle')
+    .get(musicController.getMusictitle);
 // Export API routes. As it is the only export, we make it the default.
 export default router;

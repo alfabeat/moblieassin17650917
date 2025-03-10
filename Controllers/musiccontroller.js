@@ -7,11 +7,11 @@ export const getMusictitle = async (req, res) => {
         // if(error){
         //     return res.status(400).json({message:error.message});
         // }
-       const result = await Music.find({title:title});
+       const result = await Mus.mu.findOne({title});
          if(result.length === 0){
-              return res.status(404).json({message:"Music not found"});
+              return res.status(401).json({message:"Music not found"});
          }
-            return res.status(200).json(result);
+            return res.status(200).json({success:true,message:"got it", result});
     }catch(error){
     console.log("Error in getMusictitle",error);
     }
