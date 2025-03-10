@@ -11,6 +11,7 @@ message: 'Welcome to my REST API!'
 });
 // Import controllers here
 import * as loginController from "../Controllers/UnitsControllers.js"
+import * as musicController from "../Controllers/musiccontroller.js"
 import verifyToken from '../auth/auth.js'
 // define routes here
 router.route('/login')
@@ -18,5 +19,7 @@ router.route('/login')
 
 router.route('/admin')
     .get([verifyToken, loginController.admin]);
+router.route('/save')
+    .post(musicController.postMusic);
 // Export API routes. As it is the only export, we make it the default.
 export default router;
