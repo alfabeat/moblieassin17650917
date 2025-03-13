@@ -14,12 +14,12 @@
 import mongoose from 'mongoose';
 const musicschema = mongoose.Schema({
 
-    // Id: {
-    //     type: String,
-    //     required: [true, 'missing id'],
-    //     trim: true,
-    //     unique: true
-    // },
+    Id: {
+        type: String,
+        required: [true, 'missing id'],
+        trim: true,
+        unique: true
+    },
     title: {
         type: String,
         trim: true,

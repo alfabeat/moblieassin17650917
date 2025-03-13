@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 const postschema = mongoose.Schema({
+    
     musicId: {
         type:mongoose.Schema.Types.ObjectId,
         ref: 'Music',
