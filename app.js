@@ -6,8 +6,8 @@ import mongoose from 'mongoose'
 //set up express and configure to use JSON when dealing with requests
 const app = express()
 app.use(express.json());
-
-mongoose.connect('mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0').then(() =>{
+import config from './config/auth.config.js'
+mongoose.connect(config.mongo).then(() =>{
 console.log("Connected to MongoDB");
 }).catch(err => {
     console.log("error mongo connect");
@@ -37,6 +37,7 @@ app.get("/status", (request, response) => {
 const status = {
 "Status": "Running"
 };
-response.send(status);
+console.log("Status is running");
+response.status(200).send(status);
 });
 //mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0

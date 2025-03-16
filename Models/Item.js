@@ -14,8 +14,8 @@
 import mongoose from 'mongoose';
 const musicschema = mongoose.Schema({
 
-    // Id: {
-    //     type: String,
+    // _id: {
+    //     type: mongoose.Schema.Types.ObjectId,
     //     required: [true, 'missing id'],
     //     trim: true,
     //     unique: true

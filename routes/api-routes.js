@@ -20,14 +20,14 @@ router.route('/login')
 router.route('/admin')
     .get([verifyToken, loginController.admin]);
 router.route('/save')
-    .post(musicController.postMusic);
+    .post(verifyToken, musicController.postMusic);
 router.route('/gettitle')
     .get(musicController.getMusictitle);
 router.route('/getall')
     .get(musicController.getallMusic);
 router.route('/edit')
-    .post(musicController.editMusic);
+    .post(verifyToken, musicController.editMusic);
 router.route('/delete')
-    .delete(musicController.deleteMusic);
+    .delete(verifyToken, musicController.deleteMusic);
 // Export API routes. As it is the only export, we make it the default.
 export default router;

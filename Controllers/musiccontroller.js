@@ -49,7 +49,7 @@ export const postMusic = async (req, res) => {
         if(error){
             return res.status(400).json({message:error.message});
         }
-        const newMusic = new Mus.mu({id, title, artist, album, genre});
+        const newMusic = new Mus.mu({title, artist, album, genre});
         const result = await newMusic.save();
         res.status(201).json({success:true, message:"success", result})
     }catch(error){
@@ -118,7 +118,7 @@ export const getallMusic = async (req, res) => {
             musicnum = amount -1;
         }
         const result = await Mus.mu.find().sort({title:-1}).skip(musicnum * limit).limit(limit)
-        .populate({path:'musicId', select:'title'});
+        .populate({path:'_id', select:'title'});
 
         if(result.length === 0){
              return res.status(401).json({message:"Music not found"});
