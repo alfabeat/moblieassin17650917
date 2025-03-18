@@ -35,11 +35,11 @@ const musicschema = mongoose.Schema({
         trim: true,
          default: 'missing album'
     },
-    genre: {
+    genre: [{
         type: String,
         trim: true,
          default: 'missing genre'
-    }
+    }]
 }, {
     timestamps: true
 });

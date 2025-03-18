@@ -58,15 +58,16 @@ export const postMusic = async (req, res) => {
 }
 
 export const editMusic = async (req, res) => {
+    const {_id} = req.query;
     const { title, artist, album, genre} = req.body;
     try{
         const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});
         if(error){
             return res.status(401).json({message:error.message});
         }
-        const existing = await Mus.mu.findOne({title});
+        const existing = await Mus.mu.findOne({_id});
         if(!existing){
-            return res.status(401).json({message:"Music not found"});
+            return res.status(401).json({message:"Music not found"+_id});
         }
         if(title!==""){
             existing.title = title;
@@ -88,19 +89,20 @@ export const editMusic = async (req, res) => {
 }
 
 export const deleteMusic = async (req, res) => {
+    const {_id} = req.query;
     const { title, artist, album, genre} = req.body;
     try{
         const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});
         if(error){
             return res.status(401).json({message:error.message});
         }
-        const existing = await Mus.mu.findOne({title});
+        const existing = await Mus.mu.findOne({_id});
         if(!existing){
             return res.status(404).json({message:"Music not found"});
         }
  
         await Mus.mu.deleteOne({title});
-        res.status(200).json({success:true, message:"delete success", result})
+        res.status(200).json({success:true, message:"delete success"})
     }catch(error){
     console.log("Error in editMusic",error);
     }
