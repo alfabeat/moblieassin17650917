@@ -1,5 +1,5 @@
 export default {
     secret:"simulator-authorisation-key",
-    mongo:"mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0",
-    pass:"will"
+   
+    pass:"$2b$10$97jBrYWbnSCRMKPYl2/Q8.FRMSdu2og9Ry18d8zQO7WhwrEyxHXmK"
     };

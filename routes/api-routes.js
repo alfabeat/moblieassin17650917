@@ -16,7 +16,6 @@ import verifyToken from '../auth/auth.js'
 // define routes here
 router.route('/login')
     .post(loginController.login);
-
 router.route('/admin')
     .get([verifyToken, loginController.admin]);
 router.route('/save')

@@ -7,7 +7,8 @@ import * as Mus from '../Models/Item.js'
 //add testing
 //add admin area with the token
 //create a login API
-
+//creates the music APIs
+//get music by title
 export const getMusictitle = async (req, res) => {
     const {title}=req.body;
     try{
@@ -15,7 +16,7 @@ export const getMusictitle = async (req, res) => {
         // if(error){
         //     return res.status(400).json({message:error.message});
         // }
-       const result = await Mus.mu.findOne({title});
+       const result = await Mus.mu.findOne({title});//find the music
          if(result.length === 0){
               return res.status(401).json({message:"Music not found"});
          }
@@ -25,51 +26,36 @@ export const getMusictitle = async (req, res) => {
     }
 }
 
-// export const getMusicid = async (req, res) => {
-//     const {Id}=req.body;
-//     try{
-//         // const {error, value} = Validator.ValidatormusicDto.validate({title});
-//         // if(error){
-//         //     return res.status(400).json({message:error.message});
-//         // }
-//        const result = await Mus.mu.findOne({Id});
-//          if(result.length === 0){
-//               return res.status(401).json({message:"Music not found"});
-//          }
-//             return res.status(200).json({success:true,message:"got it", result});
-//     }catch(error){
-//     console.log("Error in getMusictitle",error);
-//     }
-// }
 
+//post music
 export const postMusic = async (req, res) => {
     const {title, artist, album, genre} = req.body;
     try{
-        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});
+        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});//validate the input
         if(error){
             return res.status(400).json({message:error.message});
         }
-        const newMusic = new Mus.mu({title, artist, album, genre});
+        const newMusic = new Mus.mu({title, artist, album, genre});//create a new music
         const result = await newMusic.save();
         res.status(201).json({success:true, message:"success", result})
     }catch(error){
     console.log("Error in getMusictitle",error);
     }
 }
-
+//edit music
 export const editMusic = async (req, res) => {
     const {_id} = req.query;
     const { title, artist, album, genre} = req.body;
     try{
-        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});
+        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});//validate the input
         if(error){
             return res.status(401).json({message:error.message});
         }
         const existing = await Mus.mu.findOne({_id});
-        if(!existing){
+        if(!existing){//check if the music exists
             return res.status(401).json({message:"Music not found"+_id});
         }
-        if(title!==""){
+        if(title!==""){//update the music
             existing.title = title;
         }
         if(artist!==""){
@@ -87,16 +73,17 @@ export const editMusic = async (req, res) => {
     console.log("Error in editMusic",error);
     }
 }
-
+//delete music
 export const deleteMusic = async (req, res) => {
     const {_id} = req.query;
     const { title, artist, album, genre} = req.body;
     try{
-        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});
+        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});//validate the input
         if(error){
             return res.status(401).json({message:error.message});
         }
         const existing = await Mus.mu.findOne({_id});
+        //check if the music exists
         if(!existing){
             return res.status(404).json({message:"Music not found"});
         }
@@ -107,7 +94,7 @@ export const deleteMusic = async (req, res) => {
     console.log("Error in editMusic",error);
     }
 }
-
+//get all music
 export const getallMusic = async (req, res) => {
     const {amount}=req.query;
     const limit=10;
@@ -122,7 +109,7 @@ export const getallMusic = async (req, res) => {
         const result = await Mus.mu.find().sort({title:-1}).skip(musicnum * limit).limit(limit)
         .populate({path:'_id', select:'title'});
 
-        if(result.length === 0){
+        if(result.length === 0){//gets the music
              return res.status(401).json({message:"Music not found"});
         }
            return res.status(200).json({success:true,message:"got it", result});
