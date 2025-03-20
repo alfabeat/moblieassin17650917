@@ -7,7 +7,7 @@ import config from '../config/auth.config.js'
 * @param res The result to send any problems back to.
 * @param next The function to call if everything passes
 */
-const verifyToken = (req,res,next)=>{
+const verifyToken = (req,res,next)=>{//verify the token
 let token = req.headers["x-access-token"];
 if(!token){
 return res.status(401).send({message:"No token provided"});
