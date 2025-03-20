@@ -11,9 +11,9 @@ import config from './config/auth.config.js'
 // Check if the environment is testing and switch to the test database
 const dbURI = process.env.NODE_ENV === 'test' ? process.env.mongo_test : process.env.mongo;
 mongoose.connect(dbURI).then(() =>{
-console.log("Connected to MongoDB", dbURI);
+console.log("Connected to MongoDB");
 }).catch(err => {
-    console.log("error mongo connect",dbURI);
+    console.log("error mongo connect");
 });
 /*--- This is the new code ---*/
 // Import Body parser, which will help us read any data sent via POST
