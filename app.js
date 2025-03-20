@@ -2,15 +2,18 @@
 import express from 'express'
 //import mongoose library
 import mongoose from 'mongoose'
-
+import dotenv from 'dotenv'
+dotenv.config()
 //set up express and configure to use JSON when dealing with requests
 const app = express()
 app.use(express.json());
 import config from './config/auth.config.js'
-mongoose.connect(config.mongo).then(() =>{
-console.log("Connected to MongoDB");
+// Check if the environment is testing and switch to the test database
+const dbURI = process.env.NODE_ENV === 'test' ? process.env.mongo_test : process.env.mongo;
+mongoose.connect(dbURI).then(() =>{
+console.log("Connected to MongoDB", dbURI);
 }).catch(err => {
-    console.log("error mongo connect");
+    console.log("error mongo connect",dbURI);
 });
 /*--- This is the new code ---*/
 // Import Body parser, which will help us read any data sent via POST
@@ -23,6 +26,7 @@ app.use(bodyParser.json())
 // Import routes after bodyParser has been initialised.
 // Here is where we link to our api-routes.js file.
 import apiRoutes from "./routes/api-routes.js"
+import e from 'express'
 // Tell the app to use the routes we define in the api-routes.js file.
 app.use('/api', apiRoutes);
 /*--- This is the end of the new code ---*/
@@ -34,10 +38,10 @@ console.log("Server Listening on PORT:", PORT);
 });
 //configure how to deal with someone visiting /status
 app.get("/status", (request, response) => {
-const status = {
+const statu = {
 "Status": "Running"
 };
 console.log("Status is running");
-response.status(200).send(status);
+response.status(200).send(statu);
 });
-//mongodb+srv://williamunderh:pacwill01@clusterapimovie0.4l2lb.mongodb.net/?retryWrites=true&w=majority&appName=Clusterapimovie0
+export default app;
