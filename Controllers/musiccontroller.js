@@ -78,7 +78,7 @@ export const deleteMusic = async (req, res) => {
     const {_id} = req.query;
     const { title, artist, album, genre} = req.body;
     try{
-        const {error, value} = Validator.ValidatormusicDto.validate({title, artist, album, genre});//validate the input
+        const {error, value} = Validator.ValidatormusicDto.validate({title});//validate the input
         if(error){
             return res.status(401).json({message:error.message});
         }
